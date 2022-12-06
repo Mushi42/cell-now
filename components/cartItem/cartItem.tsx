@@ -2,7 +2,7 @@ import { Button, Card } from "react-bootstrap"
 import { Product } from "../../types/types"
 
 
-const ProductCard = ({ id, img, name, price, description, addToCart }: any) => {
+const CartItem = ({ id, img, name, price, description }: Product) => {
 
     return (
         <Card key={id} style={{ width: '18rem' }}>
@@ -11,10 +11,10 @@ const ProductCard = ({ id, img, name, price, description, addToCart }: any) => {
                 <Card.Title>{name}</Card.Title>
                 <Card.Text>{price}</Card.Text>
                 <Card.Text>{description}</Card.Text>
-                <Button variant="primary" onClick={addToCart}>Add to Cart</Button>
+                <Button variant="primary">Add to Cart</Button>
             </Card.Body>
         </Card>
     )
 }
 
-export default ProductCard
+export default CartItem

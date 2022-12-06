@@ -1,23 +1,36 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Navbar, Container, Nav } from "react-bootstrap"
 import { AiOutlineShoppingCart } from 'react-icons/ai'
 
+import useCart from "../../store/store";
+
 const NavBar = ({ }) => {
 
-    const [itemCount, setItemCount] = useState<number>(0)
+    const total = useCart((state: any) => state.total);
+    const totalqty = useCart((state: any) => state.totalqty);
+
+    const clearCart = useCart((state: any) => state.clearCart);
+    const [mytotal, setTotal] = useState();
+    const [mytotalqty, setTotalqty] = useState();
+
+    useEffect(() => {
+        setTotal(total);
+        setTotalqty(totalqty);
+    }, [total]);
 
     return (
         <Navbar bg="light" variant="light">
             <Container>
                 <Navbar.Brand href="/">Cell Now</Navbar.Brand>
                 <Nav className="me-auto">
-                    <Nav.Link href="/home">Home</Nav.Link>
+                    <Nav.Link href="/">Home</Nav.Link>
                     <Nav.Link href="/cart">Products</Nav.Link>
                 </Nav>
                 <Navbar.Collapse className="justify-content-end">
-                    <Navbar.Text>
-                        <AiOutlineShoppingCart size={24} /> {itemCount}
-                    </Navbar.Text>
+                    <Nav.Link href="/cart">
+                        <Navbar.Text>
+                            <AiOutlineShoppingCart size={24} /> {totalqty}
+                        </Navbar.Text></Nav.Link>
                 </Navbar.Collapse>
             </Container>
         </Navbar>
