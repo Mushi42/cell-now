@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 
 import useCart from '../store/store';
 import Header from '../components/navbar/navbar';
+import CartItem from '../components/cartItem/cartItem';
+import { Button } from 'react-bootstrap';
 
-export default function Cart() {
+const Cart = () => {
     const total = useCart((state: any) => state.total);
     const cart = useCart((state: any) => state.cartContent);
     const removeFromCart = useCart((state: any) => state.removeFromCart);
@@ -14,50 +16,42 @@ export default function Cart() {
     useEffect(() => {
         setCart(cart);
         setTotal(total);
-    }, [cart]);
+    }, [cart, total]);
 
     return (
         <>
             <Header />
-            <div className="">MY CART</div>
-            <div className="">
-                <div className="">
-                    <span className="">Product</span>
-                    <span className="">
-                        Price
-                    </span>
-                    <span className="">Qty</span>
-                    <span className=""></span>
-                </div>
-                {mycart.map((item: any, key: number) => (
-                    <div key={key} className="">
-                        <span className="">{item.name}</span>
-                        <span className="">
-                            $ {item.price * item.quantity}
-                        </span>
-                        <span className="">{item.quantity}</span>
-                        <span className="">
-                            <button
-                                className="p-2"
-                                onClick={() =>
-                                    removeFromCart({
-                                        id: item.id,
-                                        price: item.price,
-                                        quantity: item.quantity,
-                                    })
-                                }
-                            >
-                                X
-                            </button>
-                        </span>
-                    </div>
+            <div className="container border">
+
+                <h2 className='p-3'>Shopping Cart</h2>
+                {mycart && mycart.map((item: any, key: number) => (
+                    <CartItem
+                        key={key}
+                        id={item.id}
+                        name={item.name}
+                        img={item.img}
+                        price={item.price * item.quantity}
+                        quantity={item.quantity}
+                        removeFromCart={() =>
+                            removeFromCart({
+                                id: item.id,
+                                price: item.price,
+                                quantity: item.quantity,
+                            })
+                        } />
                 ))}
-                <div className="">
-                    <span className="">
-                        Total: ${mytotal}
+                <div className="text-end my-4">
+                    <span className="me-2">
+                        <strong>Total: ${mytotal}</strong>
                     </span>
+                    <br />
+                    <Button variant="success" onClick={() => alert('')}>Checkout</Button>
+
                 </div>
             </div>
         </>
     );
 }
+
+
+export default Cart

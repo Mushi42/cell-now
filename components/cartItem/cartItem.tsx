@@ -1,19 +1,19 @@
-import { Button, Card } from "react-bootstrap"
-import { Product } from "../../types/types"
+import { Card, Button } from "react-bootstrap"
 
-
-const CartItem = ({ id, img, name, price, description }: Product) => {
+const CartItem = ({ id, img, name, price, quantity, removeFromCart }: any) => {
 
     return (
-        <Card key={id} style={{ width: '18rem' }}>
-            <Card.Img variant="top" alt="product-image" src={img} loading={'lazy'} />
-            <Card.Body>
-                <Card.Title>{name}</Card.Title>
-                <Card.Text>{price}</Card.Text>
-                <Card.Text>{description}</Card.Text>
-                <Button variant="primary">Add to Cart</Button>
-            </Card.Body>
-        </Card>
+        <div className="col-4">
+            <Card key={id} className="flex-row">
+                <Card.Img variant="bottom" alt="product-image" src={img} loading={'lazy'} />
+                <Card.Body>
+                    <Card.Title>{name}</Card.Title>
+                    <Card.Subtitle>{price}</Card.Subtitle>
+                    <Card.Text> Qunatity : {quantity}</Card.Text>
+                    <Button variant="danger" onClick={removeFromCart}>Remove</Button>
+                </Card.Body>
+            </Card>
+        </div>
     )
 }
 

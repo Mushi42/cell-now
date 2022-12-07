@@ -24,23 +24,26 @@ const Home = () => {
     <>
       <NavBar />
       <HeroBanner />
-      <div >
-        {
-          iPhones.map(product => <ProductCard
-            key={product.id}
-            id={product.id}
-            name={product.name}
-            price={product.price}
-            img={product.img}
-            description={product.description}
-            addToCart={() => addProduct({
-              id: product.id,
-              name: product.name,
-              price: product.price,
-              quantity: 1,
-            })} />
-          )
-        }
+      <div className="container my-3" >
+        <div className="row">
+          {
+            iPhones.map(product => <ProductCard
+              key={product.id}
+              id={product.id}
+              name={product.name}
+              price={product.price}
+              img={product.img}
+              description={product.description}
+              addToCart={() => addProduct({
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                img: product.img,
+                quantity: 1,
+              })} />
+            )
+          }
+        </div>
       </div>
     </>
   )

@@ -24,7 +24,7 @@ const NavBar = ({ }) => {
                 <Navbar.Brand href="/">Cell Now</Navbar.Brand>
                 <Nav className="me-auto">
                     <Nav.Link href="/">Home</Nav.Link>
-                    <Nav.Link href="/cart">Products</Nav.Link>
+                    {/* <Nav.Link href="/cart">Products</Nav.Link> */}
                 </Nav>
                 <Navbar.Collapse className="justify-content-end">
                     <Nav.Link href="/cart">
