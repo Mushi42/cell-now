@@ -25,6 +25,19 @@ const useCart = create(
                 }));
             },
 
+            updateQuantity: (params: any) =>
+                set((state: any) => ({
+                    totalqty: state.totalqty + params.quantity,
+                    total: state.total + params.price * params.quantity,
+                    cartContent: () => {
+                        const product = state.cartContent.findIndex((item: any) => item.id === params.id)
+                        product != -1 ? state.cartContent[product].quantity = params.quantity : ''
+                        return state.cartContent
+                    },
+                })
+
+                ),
+
             clearCart: () => set({ totalqty: 0, total: 0, cartContent: [] }),
 
             removeFromCart: (params: { price: number; quantity: number; id: any; }) =>
